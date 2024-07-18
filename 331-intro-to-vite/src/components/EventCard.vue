@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-const event = ref({
-  id: 5928101,
-  category: 'animal welfare',
-  title: 'Cat Adoption Dat',
-  description: 'Find your new feline friend at this event.',
-  location: 'Meow Town',
-  date: 'January 28,2022',
-  time:'12:00',
-  petsAllowed: true,
-  organizer: 'Kat laydee'
-})
+import type { Event } from '@types'
+defineProps<{
+  event: Event
+}>()
+// const event = ref({
+//   id: 5928101,
+//   category: 'animal welfare',
+//   title: 'Cat Adoption Dat',
+//   description: 'Find your new feline friend at this event.',
+//   location: 'Meow Town',
+//   date: 'January 28,2022',
+//   time:'12:00',
+//   petsAllowed: true,
+//   organizer: 'Kat laydee'
+// })
 </script>
 
 <template>
@@ -31,6 +35,11 @@ const event = ref({
   cursor: pointer;
   border: 1px solid #39495c;
   margin-bottom: 18px;
+}
+.greetings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .event-card:hover {
   transform: scale(1.01);
