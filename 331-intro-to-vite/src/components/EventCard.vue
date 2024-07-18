@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import { ref } from 'vue'
 const event = ref({
   id: 5928101,
   category: 'animal welfare',
-  title: 'CAt Adoption Dat',
+  title: 'Cat Adoption Dat',
   description: 'Find your new feline friend at this event.',
   location: 'Meow Town',
   date: 'January 28,2022',
@@ -17,6 +17,7 @@ const event = ref({
   <div class="greetings">
     <div class="event-class">
       <div class="event-card">
+        <h2>{{ event.title }}</h2>
         <span>@{{ event.time }} on {{ event.date }}</span>
       </div>
     </div>

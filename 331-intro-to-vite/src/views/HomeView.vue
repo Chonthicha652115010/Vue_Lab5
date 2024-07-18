@@ -6,6 +6,5 @@ import EventCard from '@/components/EventCard.vue';
 <template>
 <div class="home">
   <EventCard />
-
 </div>
 </template>
