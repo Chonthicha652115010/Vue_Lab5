@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import EventCard from '@/components/EventCard.vue';
-import EventCardSec from '@/components/EventCardSec.vue';
-import type { Event } from '@/types'
+import Event from '@/types/Event'
 import { ref, onMounted } from 'vue'
 import EventService  from '@/services/EventService'
+import EventCard from '@/components/EventCard.vue';
+import EventCardSec from '@/components/EventCardSec.vue';
 
 const events = ref<Event[]>(null)
 

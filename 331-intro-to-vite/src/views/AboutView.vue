@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Event } from '@/types'
+import Event from '@/types/Event'
 import { ref, onMounted } from 'vue'
 import StudentService from '@/services/StudentService';
 import StudentCard from '@/components/StudentCard.vue';

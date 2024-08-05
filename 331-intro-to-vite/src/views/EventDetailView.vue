@@ -1,27 +1,27 @@
 <script setup lang="ts">
 import Event from '@/types/Event'
-import { ref, onMounted, defineProps} from 'vue'
+import { ref, onMounted, defineProps } from 'vue'
 import EventService from '@/services/EventService';
-import { register } from 'module';
 const event = ref<Event>(null)
 //props is make it run dynamically
 const props = defineProps({
     id: {
         type: String,
-        require: true
+        required: true
     }
 })
 
 onMounted(() => {
+    console.log("Event ID", props.id)
     //fetch event (by ID) and local event data
     // EventService.getEvent(id.value)
     EventService.getEvent(props.id)
-    .then((response) => {
-        event.value = response.data
-    })
-    .catch((error) => {
-        console.error('There was an error!', error)
-    })
+        .then((response) => {
+            event.value = response.data
+        })
+        .catch((error) => {
+            console.error('There was an error!', error)
+        })
 })
 </script>
 

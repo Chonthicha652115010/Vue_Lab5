@@ -10,8 +10,9 @@ const apiClient = axios.create({
 })
 
 export default{
-    getEvents(){
-        return apiClient.get('/events')
+    //recieve perPageand page to sent to the request url(postman)
+    getEvents(perPage: Number, page: Number){
+        return apiClient.get('/events?_limit=' + perPage + '&_page=' + page)
     },
 
     //recives the ID and get data
