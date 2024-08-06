@@ -10,9 +10,8 @@ const props = defineProps({
         required: true
     }
 })
-
 onMounted(() => {
-    console.log("Event ID", props.id)
+    console.log("Event ID", id.value)
     //fetch event (by ID) and local event data
     // EventService.getEvent(id.value)
     EventService.getEvent(props.id)

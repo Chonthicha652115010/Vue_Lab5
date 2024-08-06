@@ -9,7 +9,7 @@ const events = ref<Event[]>(null)
 const props = defineProps({
   page: {
     type: Number,
-    requied: true
+    required: true
   }
 })
 const page = computed(() => props.page)
@@ -29,16 +29,12 @@ onMounted(() => {
 
 <template>
   <h1>Events For Good</h1>
-  <!-- <div class="events">
+  <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <EventCardSec v-for="event in events" :key="event.id" :event="event" />
 
-  </div> -->
-  <div v-if="events.length > 0" class="events">
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <EventCardSec v-for="event in events" :key="event.id" :event="event" />
   </div>
-  <div v-else>No events available</div>
+
 </template>
 
 <style scoped>
