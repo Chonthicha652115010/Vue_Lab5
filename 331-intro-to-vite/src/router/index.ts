@@ -7,9 +7,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      //recieve query from eventList
       path: '/',
       name: 'event-list-view',
-      component: EventListView
+      component: EventListView,
+      props: (route) => ({ page: parseInt (route.query.page?.toString() || '1') })
     },
     {
       //update for recieve the id as input parameter 001.7-001.8evc
