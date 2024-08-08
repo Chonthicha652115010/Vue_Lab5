@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Event from '@/types/Event'
+import {type Event} from '@/types'
 import { ref, onMounted, defineProps } from 'vue'
 import EventService from '@/services/EventService';
-const event = ref<Event>(null)
+const events = ref<Event[] | null>(null)
 //props is make it run dynamically
 const props = defineProps({
     id: {
@@ -11,11 +11,10 @@ const props = defineProps({
     }
 })
 onMounted(() => {
-    console.log("Event ID", id.value)
     //fetch event (by ID) and local event data
     // EventService.getEvent(id.value)
-    EventService.getEvent(props.id)
-        .then((response) => {
+    EventService.getEvent(parseInt(props.id))
+    .then((response) => {
             event.value = response.data
         })
         .catch((error) => {
