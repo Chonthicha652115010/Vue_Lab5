@@ -1,13 +1,10 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <div class="layout">
+  <div id="layout">
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink :to="{ name: 'event-list-view' }">Event</RouterLink>
+          <RouterLink :to="{ name: 'event-list-view' }">Events</RouterLink> |
+          <RouterLink :to="{ name: 'student-list-view' }">Students</RouterLink> |
           <RouterLink :to="{ name: 'about' }">About</RouterLink>
         </nav>
         <div>
@@ -18,17 +15,41 @@ import { RouterLink, RouterView } from 'vue-router'
         </div>
       </div>
     </header>
+
+    <RouterView />
   </div>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+
+const pageSizes = [2, 4, 6, 8, 10]
+const pageSize = ref(pageSizes[1])
+
+const router = useRouter()
+const route = useRoute()
+
+const updatePageSize = () => {
+  router.push({
+    name: 'event-list-view',
+    query: { ...route.query, pageSize: pageSize.value, page: 1 }
+  })
+}
+
+if (route.query.pageSize) {
+  pageSize.value = parseInt(route.query.pageSize.toString())
+}
+</script>
+
 <style>
-.layout {
+#layout {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 
 nav {
@@ -40,11 +61,7 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+nav a .router-link-exact-active {
   color: #42b983;
-}
-
-h2 {
-  font-size: 20px;
 }
 </style>

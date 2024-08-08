@@ -10,7 +10,7 @@ const apiClient = axios.create({
 })
 
 export default{
-    getEvents(){
+    getStudents(){
         return apiClient.get('/students')
     }
 }

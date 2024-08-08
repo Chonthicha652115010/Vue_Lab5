@@ -1,23 +1,37 @@
 <script setup lang="ts">
-import Event from '@/types/Event'
+import EventCard from '@/components/EventCard.vue'
+import EventCardSec from '@/components/EventCardSec.vue'
+import { type Event } from '@/types'
+import StudentCard from '@/components/StudentCard.vue'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
-import EventCard from '@/components/EventCard.vue';
-import EventCardSec from '@/components/EventCardSec.vue';
+import { error } from 'console'
+import { useRoute } from 'vue-router'
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
+
+const route = useRoute()
+
+const hasNexPage = computed(() => {
+  const totalPages = Math.ceil(totalEvents.value / pageSize.value)
+  return page.value < totalPages
+})
 
 const props = defineProps({
   page: {
     type: Number,
     required: true
+  },
+  pageSize: {
+    type: Number,
+    required: true
   }
 })
 const page = computed(() => props.page)
+const pageSize = computed(() => props.pageSize)
 
 onMounted(() => {
-  //pagination into 2 every time
   watchEffect(() => {
     events.value = null
     EventService.getEvents(pageSize.value, page.value)
@@ -32,12 +46,14 @@ onMounted(() => {
 })
 </script>
 
-
 <template>
-  <h1>Events For Good</h1>
   <div class="events">
+    <h1>Events For Good</h1>
+    <!-- new element -->
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <EventCardSec v-for="event in events" :key="event.id" :event="event" />
+
+    <!-- <CategoryOrganizer v-for="event in events" key="event.id" :event="event" /> -->
     <div class="pagination">
       <RouterLink
         id="page-prev"
@@ -55,7 +71,6 @@ onMounted(() => {
       >
     </div>
   </div>
-
 </template>
 
 <style scoped>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Event from '@/types/Event'
+
 defineProps<{
   event: Event
 }>()
