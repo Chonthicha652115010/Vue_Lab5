@@ -10,6 +10,12 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink :to="{ name: 'event-list-view' }">Event</RouterLink>
           <RouterLink :to="{ name: 'about' }">About</RouterLink>
         </nav>
+        <div>
+          <label for="page-size">Events per page: </label>
+          <select id="page-size" v-model="pageSize" @change="updatePageSize">
+            <option v-for="size in pageSizes" :key="size" :value="size">{{ size }}</option>
+          </select>
+        </div>
       </div>
     </header>
   </div>
