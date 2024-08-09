@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import StudentList from '@/components/StudentList.vue'
+import StudentCard from '@/components/StudentCard.vue'
 import { type Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
@@ -46,7 +46,7 @@ onMounted(() => {
   <h1>Event For Good</h1>
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <StudentList v-for="event in events" :key="event.id" :event="event" />
+    <StudentCard v-for="event in events" :key="event.id" :event="event" />
     <div class="pagination">
       <RouterLink id="page-prev" :to="{ name: 'event-list-view', query: { page: page - 1, pageSize: pageSize } }" rel="prev" v-if="page != 1">&#60; Prev Page</RouterLink>
       <RouterLink id="page-next" :to="{ name: 'event-list-view', query: { page: page + 1, pageSize: pageSize } }" rel="next" v-if="hasNextPage">Next Page &#62;</RouterLink>

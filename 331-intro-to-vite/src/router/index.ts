@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '@/views/EventListView.vue'
 import AboutView from '@/views/AboutView.vue'
-import StudentListView from '@/views/StudentListView.vue'
 import EventDetailView from '@/views/event/DetailView.vue'
 import EventRegisterView from '@/views/event/RegisterView.vue'
 import EventEditView from '@/views/event/EditView.vue'
 import EventLayoutView from '@/views/event/LayoutView.vue'
+import StudentListView from '@/views/StudentListView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
-import nProgress from ' nprogress'
+import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
 import { useEventStore } from '@/stores/event'
 
@@ -76,7 +76,7 @@ const router = createRouter({
     {
       path: '/Student',
       name: 'Student',
-      component: StudentView
+      component: StudentListView
     },
     {
       path: '/network-error',

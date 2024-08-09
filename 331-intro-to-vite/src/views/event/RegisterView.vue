@@ -23,7 +23,16 @@ const register = () => {
     }, 3000)
     router.push({ name: 'event-detail-view', params: { id: props.event.id }})
 }
-
+/*
+const register = () => {
+    // if the registration API call successful
+    showMessage.value = true
+    flashMessage.value = 'Registration successful!'
+    setTimeout(() => {
+        showMessage.value = false
+        router.push({ name: 'event-detail-view' })
+    }, 3000) // Adjust the timeout duration as needed
+}*/
 </script>
 
 <template>
