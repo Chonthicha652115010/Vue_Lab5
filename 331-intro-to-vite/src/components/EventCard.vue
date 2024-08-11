@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type Event} from '@/types'
+import { type Event } from '@/types'
 defineProps<{
   event: Event
 }>()
@@ -9,10 +9,12 @@ defineProps<{
 <template>
   <!-- sent id to component  001.7ind-->
   <RouterLink class="event-link" :to="{ name: 'event-detail-view', params: { id: event.id } }">
-      <div class="event-card hover:scale-101 hover:shadow-sp">
-        <h2>{{ event.title }}</h2>
-        <span>@{{ event.time }} on {{ event.date }}</span>
-      </div>
+    <div class="event-card cusor-pointer border border-gray-600 
+                  p-4 w-64 mb-6 hover:scale-101 
+                  hover:shadow-sp">
+      <h2>{{ event.title }}</h2>
+      <span>@{{ event.time }} on {{ event.date }}</span>
+    </div>
   </RouterLink>
 </template>
 
