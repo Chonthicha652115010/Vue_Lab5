@@ -50,16 +50,21 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
 h2 {
   font-size: 20px;
 }
+
 @keyframes yellofade {
   from {
     background-color: yellow;
-  } to {
+  }
+
+  to {
     background-color: transparent;
   }
 }
+
 #flashMessage {
   animation: yellofade 3s ease-in-out;
 }
