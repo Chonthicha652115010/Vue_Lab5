@@ -3,6 +3,7 @@ import EventCard from '@/components/EventCard.vue'
 import StudentCard from '@/components/StudentCard.vue'
 import { type Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
+import { RouterLink } from 'vue-router'
 import EventService from '@/services/EventService'
 
 const events = ref<Event[] | null>(null)
@@ -45,8 +46,8 @@ onMounted(() => {
 <template>
   <h1>Event For Good</h1>
   <div class="flex flex-col items-center">
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <StudentCard v-for="event in events" :key="event.id" :event="event" />
+    <EventCard  v-for="event in events" :key="event.id" :event="event" />
+    <StudentCard  v-for="event in events" :key="event.id" :event="event" />
     
     <div class="pagination">
       <RouterLink id="page-prev" :to="{ name: 'event-list-view', query: 

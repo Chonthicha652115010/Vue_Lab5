@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <!-- sent id to component  001.7ind-->
   <RouterLink class="event-link" :to="{ name: 'event-detail-view', params: { id: event.id } }">
-    <div class="event-card cusor-pointer border border-gray-600 
+    <div class="cursor-pointer border border-gray-600 
                   p-4 w-64 mb-6 hover:scale-101 
                   hover:shadow-sp">
       <h2>{{ event.title }}</h2>
@@ -19,13 +19,13 @@ defineProps<{
 </template>
 
 <style scoped>
-.event-card {
+/* .event-card {
   padding: 20px;
   width: 250px;
   cursor: pointer;
   border: 1px solid #39495c;
   margin-bottom: 18px;
-}
+} */
 
 /* .event-card:hover {
   transform: scale(1.01);

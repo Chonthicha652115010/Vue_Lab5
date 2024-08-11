@@ -9,7 +9,7 @@ const pageSize = ref(2)
 </script>
 
 <template>
-  <div class="text-center font-sans text-gray-700 antialias">
+  <div class="text-center font-sans text-gray-700 antialiased">
     <header>
       <div id="flashMessage" v-if="message">
         <h4>{{ message }}</h4>
