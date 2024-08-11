@@ -15,10 +15,12 @@ const pageSize = ref(2)
         <h4>{{ message }}</h4>
       </div>
       <div class="wrapper">
-        <nav>
-          <RouterLink :to="{ name: 'event-list-view', query: { pageSize: pageSize } }">Event</RouterLink>
-          <RouterLink :to="{ name: 'about' }">About</RouterLink>
-          <RouterLink :to="{ name: 'Student' }">Student</RouterLink>
+        <nav class="py-6">
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
+            :to="{ name: 'event-list-view', query: { pageSize: pageSize } }">Event</RouterLink>
+          
+            <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" 
+            :to="{ name: 'about' }">About</RouterLink>
         </nav>
       </div>
     </header>
