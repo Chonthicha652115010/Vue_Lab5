@@ -13,11 +13,12 @@ const pageSize = ref(2)
     <header>
       <div
         id="flashMessage"
-        class="animate-fade bg-yellow-300 text-yellow-900 py-2 px-4 rounded mb-4"
         v-if="message"
+        class="animate-fade bg-yellow-300 text-yellow-900 py-2 px-4 rounded mb-4"
       >
         <h4>{{ message }}</h4>
       </div>
+      <h1>Deploy with vercel</h1>
       <div class="wrapper">
         <nav class="py-6 flex space-x-4 justify-center">
           <RouterLink
