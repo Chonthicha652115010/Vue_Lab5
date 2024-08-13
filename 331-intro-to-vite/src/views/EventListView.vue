@@ -2,75 +2,73 @@
 import EventCard from '@/components/EventCard.vue'
 import { type Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import EventService from '@/services/EventService'
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
-
+const hasNextPage = computed(() => {
+  const totalPages = Math.ceil(totalEvents.value / getPageSize())
+  return page.value < totalPages
+})
 const props = defineProps({
   page: {
     type: Number,
     required: true
-  },
-  pageSize: {
-    type: Number,
-    required: true
   }
 })
-
 const page = computed(() => props.page)
-const pageSize = computed(() => props.pageSize)
+const router = useRouter()
+const route = useRoute()
 
-const hasNextPage = computed(() => {
-  const totalPage = Math.ceil(totalEvents.value / pageSize.value)
-  return page.value < totalPage
-})
+// Get the page size from the query parameter or use a default value
+const getPageSize = () => {
+  const pageSize = Number(route.query.pageSize)
+  return isNaN(pageSize) ? 3 : pageSize
+}
 
 onMounted(() => {
   watchEffect(() => {
-    events.value = null
-    EventService.getEvents(pageSize.value, page.value)
+    EventService.getEvents(getPageSize(), page.value)
       .then((response) => {
         events.value = response.data
-        totalEvents.value = response.headers['x-total-count']
+        totalEvents.value = Number(response.headers['x-total-count'])
       })
       .catch((error) => {
-        console.error('There was an error!', error)
+        router.push({ name: 'network-error-view' })
       })
   })
 })
+
+// Update the URL with the new page size
+const updatePageSize = (pageSize: number) => {
+  router.push({ query: { ...route.query, pageSize } })
+}
 </script>
 
 <template>
-  <h1 class="text-2xl font-bold mb-4">Event For Good</h1>
+  <h1 class="text-center text-2xl font-bold mb-4">Events For Good</h1>
   <div class="flex flex-col items-center">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <StudentCard v-for="event in events" :key="event.id" :event="event" />
 
-    <div class="flex w-[290px] mt-4">
+    <div class="flex w-72 justify-between mt-4">
       <RouterLink
         id="page-prev"
-        class="flex-1 text-left text-blue-500 hover:underline"
-        :to="{
-          name: 'event-list-view',
-          query: { page: page - 1, pageSize: pageSize }
-        }"
+        :to="{ name: 'event-list-view', query: { page: page - 1, pageSize: getPageSize() } }"
         rel="prev"
-        v-if="page != 1"
-        >&#60; Prev Page
+        v-if="page > 1"
+        class="text-blue-500 hover:text-blue-700 text-left flex-1"
+      >
+        &#60; Prev Page
       </RouterLink>
-
       <RouterLink
         id="page-next"
-        class="flex-1 text-right text-blue-500 hover:underline"
-        :to="{
-          name: 'event-list-view',
-          query: { page: page + 1, pageSize: pageSize }
-        }"
+        :to="{ name: 'event-list-view', query: { page: page + 1, pageSize: getPageSize() } }"
         rel="next"
         v-if="hasNextPage"
-        >Next Page &#62;
+        class="text-blue-500 hover:text-blue-700 text-right flex-1"
+      >
+        Next Page &#62;
       </RouterLink>
     </div>
   </div>

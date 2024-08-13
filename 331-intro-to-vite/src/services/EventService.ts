@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: 'https://my-json-server.typicode.com/Chonthicha652115010/set-up',
+  baseURL: 'https://my-json-server.typicode.com/SammyEiei/my_Server_lab2',
+  //   baseURL: 'https://dv-student-backend-2019.appspot.com/',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -10,12 +11,13 @@ const apiClient = axios.create({
 })
 
 export default {
-  //recieve perPageand page to sent to the request url(postman)
-  getEvents(perPage: Number, page: Number) {
-    return apiClient.get('/events?_limit=' + perPage + '&_page=' + page)
+  // getEvents() {
+  //   return apiClient.get('/events')
+  getEvents(perPage: number, page: number) {
+    return apiClient.get(`/events?_limit=${perPage}&_page=${page}`)
   },
-  //recives the ID and get data
+
   getEvent(id: number) {
-    return apiClient.get('/events/' + id)
+    return apiClient.get(`/events/${id}`)
   }
 }
