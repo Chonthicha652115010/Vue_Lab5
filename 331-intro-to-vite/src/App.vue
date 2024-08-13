@@ -5,6 +5,7 @@ import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 const store = useMessageStore()
 const { message } = storeToRefs(store)
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const router = useRouter()
 const route = useRoute()
