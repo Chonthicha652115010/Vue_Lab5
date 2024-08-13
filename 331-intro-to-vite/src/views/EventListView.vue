@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import StudentCard from '@/components/StudentCard.vue'
 import { type Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { RouterLink } from 'vue-router'
@@ -44,41 +43,56 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>Event For Good</h1>
+  <h1 class="text-2xl font-bold mb-4">Event For Good</h1>
   <div class="flex flex-col items-center">
-    <EventCard  v-for="event in events" :key="event.id" :event="event" />
-    <StudentCard  v-for="event in events" :key="event.id" :event="event" />
-    
-    <div class="pagination">
-      <RouterLink id="page-prev" :to="{ name: 'event-list-view', query: 
-        { page: page - 1, pageSize: pageSize } }" 
-        rel="prev" v-if="page != 1">&#60; Prev Page
-      </RouterLink>
-      
-      <RouterLink id="page-next" :to="{ name: 'event-list-view', query: 
-        { page: page + 1, pageSize: pageSize } }" 
-        rel="next" v-if="hasNextPage">Next Page &#62;
+    <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <StudentCard v-for="event in events" :key="event.id" :event="event" />
+
+    <div class="flex w-[290px] mt-4">
+      <RouterLink
+        id="page-prev"
+        class="flex-1 text-left text-blue-500 hover:underline"
+        :to="{
+          name: 'event-list-view',
+          query: { page: page - 1, pageSize: pageSize }
+        }"
+        rel="prev"
+        v-if="page != 1"
+        >&#60; Prev Page
       </RouterLink>
 
+      <RouterLink
+        id="page-next"
+        class="flex-1 text-right text-blue-500 hover:underline"
+        :to="{
+          name: 'event-list-view',
+          query: { page: page + 1, pageSize: pageSize }
+        }"
+        rel="next"
+        v-if="hasNextPage"
+        >Next Page &#62;
+      </RouterLink>
     </div>
   </div>
 </template>
 
-<style scoped>
-
+<!-- <style scoped>
 .pagination {
   display: flex;
   width: 290px;
 }
+
 .pagination a {
   flex: 1;
   text-decoration: none;
   color: #2c3e50;
 }
+
 #page-prev {
   text-align: left;
 }
+
 #page-next {
   text-align: right;
 }
-</style>
+</style> -->

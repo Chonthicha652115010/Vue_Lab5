@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, toRefs } from 'vue'
 import { type Event } from '@/types'
-import { useRouter } from 'vue-router';
-import { useMessageStore } from '@/stores/message';
+import { useRouter } from 'vue-router'
+import { useMessageStore } from '@/stores/message'
 
 const props = defineProps<{
-    event: Event
-    id: String
+  event: Event
+  id: String
 }>()
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { event } = toRefs(props)
@@ -16,12 +16,11 @@ const showMessage = ref(false)
 const flashMessage = ref('')
 
 const register = () => {
-  store.updateMessage('You are successfully registered for ' + 
-    props.event.title)
-    setTimeout(() => {
-      store.resetMessage()
-    }, 3000)
-    router.push({ name: 'event-detail-view', params: { id: props.event.id }})
+  store.updateMessage('You are successfully registered for ' + props.event.title)
+  setTimeout(() => {
+    store.resetMessage()
+  }, 3000)
+  router.push({ name: 'event-detail-view', params: { id: props.event.id } })
 }
 /*
 const register = () => {
@@ -37,8 +36,10 @@ const register = () => {
 
 <template>
   <p>Register event here</p>
-  <button @click="register">Register</button>
-  <div v-if="showMessage">
+  <button @click="register" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Register
+  </button>
+  <div v-if="showMessage" class="mt-4 text-green-500">
     {{ flashMessage }}
   </div>
 </template>

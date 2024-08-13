@@ -5,7 +5,6 @@ import EventDetailView from '@/views/event/DetailView.vue'
 import EventRegisterView from '@/views/event/RegisterView.vue'
 import EventEditView from '@/views/event/EditView.vue'
 import EventLayoutView from '@/views/event/LayoutView.vue'
-import StudentListView from '@/views/StudentListView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
@@ -19,7 +18,7 @@ const router = createRouter({
       path: '/',
       name: 'event-list-view',
       component: EventListView,
-      props: (route) => ({ 
+      props: (route) => ({
         page: parseInt(route.query.page?.toString() || '1'),
         pageSize: parseInt(route.query.pageSize?.toString() || '2')
       })
@@ -33,19 +32,20 @@ const router = createRouter({
         const id = parseInt(to.params.id as string)
         const eventStore = useEventStore()
         return EventService.getEvent(id)
-        .then((response) => {
-          // need to setup the data for the event
-          eventStore.setEvent(response.data)
-        }).catch((error) => {
-          if (error.response && error.response.status === 404) {
-            return {
-              name: '404-resource-view',
-              params: { resource: 'event'}
+          .then((response) => {
+            // need to setup the data for the event
+            eventStore.setEvent(response.data)
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              return {
+                name: '404-resource-view',
+                params: { resource: 'event' }
+              }
+            } else {
+              return { name: 'network-error-view' }
             }
-          } else {
-            return { name: 'network-error-view'}
-          }
-        })
+          })
       },
       children: [
         {
@@ -73,11 +73,7 @@ const router = createRouter({
       name: 'about',
       component: AboutView
     },
-    {
-      path: '/Student',
-      name: 'Student',
-      component: StudentListView
-    },
+    
     {
       path: '/network-error',
       name: 'network-error-view',
